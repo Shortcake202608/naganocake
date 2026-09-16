@@ -7,6 +7,6 @@ class AddFieldsToCustomers < ActiveRecord::Migration[8.0]
     add_column :customers, :postal_code, :string
     add_column :customers, :address, :string
     add_column :customers, :phone_number, :string
-    add_column :customers, :is_active, :boolean
+    add_column :customers, :is_active, :boolean, default: true, null: false
   end
 end
