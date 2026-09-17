@@ -1,0 +1,114 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh">
+  <div class="card p-4 shadow-sm " style="width: 800px;" >
+    <h4>新規会員登録</h4>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "customers/shared/error_messages", resource: resource %>
+        <!-- 名前 -->
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <label class="form-label mb-0">名前</label>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-end">
+          <label class="form-label mb-0">(姓)</label>
+        </div>
+        <div class="col-3">
+          <%= f.text_field :last_name, class: "form-control", placeholder: "令和" %>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-end">
+          <label class="form-label mb-0">(名)</label>
+        </div>
+        <div class="col-3">
+          <%= f.text_field :first_name, class: "form-control", placeholder: "道子" %>
+        </div>
+      </div>
+
+      <!-- フリガナ -->
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <label class="form-label mb-0">フリガナ</label>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-end">
+          <label class="form-label mb-0">(セイ)</label>
+        </div>
+        <div class="col-3">
+          <%= f.text_field :last_name_kana, class: "form-control", placeholder: "レイワ" %>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-end">
+          <label class="form-label mb-0">(メイ)</label>
+        </div>
+        <div class="col-3">
+          <%= f.text_field :first_name_kana, class: "form-control", placeholder: "ミチコ" %>
+        </div>
+      </div>
+
+      <!-- メールアドレス -->
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <%= f.label :email, "メールアドレス", class: "form-label mb-0" %>
+        </div>
+        <div class="col-10">
+          <%= f.email_field :email, class: "form-control", placeholder: "sample@example.com" %>
+        </div>
+      </div>
+
+      <!-- 郵便番号 -->
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <label class="form-label mb-0">郵便番号(ハイフンなし)</label>
+        </div>
+        <div class="col-10">
+          <%= f.text_field :postal_code, class: "form-control", placeholder: "0000000" %>
+        </div>
+      </div>
+
+      <!-- 住所 -->
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <%= f.label :address, "住所", class: "form-label mb-0" %>
+        </div>
+        <div class="col-10">
+          <%= f.text_field :address, class: "form-control", placeholder: "東京都渋谷区代々木神園町0-0" %>
+        </div>
+      </div>
+
+      <!-- 電話番号 -->
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <label class="form-label mb-0">電話番号(ハイフンなし)</label>
+        </div>
+        <div class="col-10">
+          <%= f.text_field :phone_number, class: "form-control", placeholder: "0000000000" %>
+        </div>
+      </div>
+
+      <!-- パスワード -->
+      <div class="row mb-3">
+        <div class="col-2 d-flex align-items-center">
+          <%= f.label :password, "パスワード(6文字以上)", class: "form-label mb-0" %>
+        </div>
+        <div class="col-10">
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+      </div>
+
+      <!-- パスワード確認 -->
+      <div class="row mb-4">
+        <div class="col-2 d-flex align-items-center">
+          <%= f.label :password_confirmation, "パスワード(確認用)", class: "form-label mb-0" %>
+        </div>
+        <div class="col-10">
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+      </div>
+
+      <!-- 登録ボタン -->
+      <div class="text-center">
+        <%= f.submit "新規登録", class: "btn btn-success px-5 py-2 fw-bold" %>
+      </div>
+    <% end %>
+  
+    <h4>既に登録済みの方</h4>
+       <p><%= link_to "こちら", "/customers/sign_in" %>からログインしてください。</p>
+  </div>
+</div>
