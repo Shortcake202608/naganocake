@@ -1,0 +1,33 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh">
+  <div class="card p-4 shadow-sm " style="width: 800px;" >
+    <h4 class="mb-4">管理者ログイン</h4>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="row mb-3">
+        <div class="col-4 d-flex align-items-center">
+          <%= f.label :email, "メールアドレス", class: "form-label" %>
+        </div>
+        <div class="col-8">
+          <%= f.email_field :email, class: "form-control",
+            autofocus: true, autocomplete: "email" %>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-4 d-flex align-items-center">
+          <%= f.label :password, "パスワード", class: "form-label" %>
+        </div>
+        <div class="col-8">
+          <%= f.password_field :password, class: "form-control",
+            autocomplete: "current-password" %>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "ログイン", class: "btn btn-primary text-white px-4" %>
+      </div>
+    <% end %>
+
+    <%= render "admins/shared/links" %>
+  </div>
+</div>
