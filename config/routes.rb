@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :customers, only: [:update] do
+    collection do
+      get 'my_page'
+      get 'information'
+      get 'information/edit', action: :edit
+      get 'unsubscribe'
+      patch 'withdraw'
+    end
+  end 
+
   devise_for :admins, path: "admin", controllers: {
     sessions: "admins/sessions"
   }
