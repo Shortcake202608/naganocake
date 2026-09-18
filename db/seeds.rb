@@ -7,6 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
 Customer.create!(
   last_name: "山田",
   first_name: "太郎",
@@ -19,3 +20,8 @@ Customer.create!(
   password: "password",
   is_active: true
 )
+
+Genre.create!(name: "ケーキ")
+Genre.create!(name: "プリン")
+Genre.create!(name: "焼き菓子")
+Genre.create!(name: "キャンディ")
