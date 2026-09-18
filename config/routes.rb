@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  root "homes#top"
+  get "about", to: "homes#about"
+  resources :customers, only: [ :update ] do
+    collection do
+      get "my_page"
+      get "information"
+      get "information/edit", action: :edit
+      get "unsubscribe"
+      patch "withdraw"
+    end
+  end
+
   devise_for :admins, path: "admin", controllers: {
     sessions: "admins/sessions"
   }
@@ -6,6 +18,11 @@ Rails.application.routes.draw do
     registrations: "customers/registrations",
     sessions: "customers/sessions"
   }
+
+  namespace :admin do
+    resources :items, only: [ :index, :show, :edit, :new, :create, :update ]
+    resources :genres, only: [ :index, :create, :edit, :update ]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

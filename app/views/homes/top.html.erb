@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center align-items-center" style="height: 400px;">
+  <div class="p-4 rounded shadow text-start"
+       style="width: 40%; height: 70%;
+              background-image: url(<%= asset_path 'top-image.jpg' %>);
+              background-size: cover;
+              background-position: center;">
+    <p>ようこそ、ながのCAKEへ!</p>
+    <p>このサイトは、ケーキ販売のECサイトになります。</p>
+    <p>会員でない方も商品の閲覧はできますが、</p>
+    <p>購入には会員登録が必要になります。</p>
+  </div>
+</div>
+<div class="container my-5">
+  <h3 class="mb-4">新着商品</h3>
+  <div class="row">
+    <% @new_items.first(4).each do |item| %>
+      <div class="col-md-3 mb-4">
+        <div class="card h-100">
+          <%= image_tag item.image, class: "card-img-top" %>
+
+          <div class="card-body text-center">
+            <h5 class="card-title"><%= item.name %></h5>
+            <p class="card-text">¥<%= item.price %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="text-end mt-3">
+    <%= link_to "すべての商品を見る", items_path, class: "btn btn-outline-primary" %>
+  </div>
+</div>
