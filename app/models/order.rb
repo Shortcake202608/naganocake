@@ -16,4 +16,9 @@ class Order < ApplicationRecord
   validates :name, presence: true
   validates :shipping_cost, presence: true
   validates :total_payment, presence: true
+
+  def subtotal
+    price * amount   # price は税込価格を保存しておく
+  end
+
 end

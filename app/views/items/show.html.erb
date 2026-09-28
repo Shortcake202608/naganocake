@@ -1,0 +1,41 @@
+<div class="container mt-5">
+
+  <div class="row">
+
+    <!-- 左：商品画像 -->
+    <div class="col-md-4">
+      <%= image_tag @item.image, class: "item-detail-img" %>
+    </div>
+
+    <!-- 右：商品情報 -->
+    <div class="col-md-8">
+      <h4 class="mb-2"><%= @item.name %></h4>
+
+      <p class="mb-2"><%= @item.description %></p>
+
+      <p class="mb-2">
+        <strong>¥<%= number_with_delimiter(@item.price_with_tax) %></strong>（税込）
+      </p>
+
+      <!-- ▼ カートに入れるフォーム ▼ -->
+      <%= form_with model: CartItem.new, url: cart_items_path, method: :post do |f| %>
+
+        <!-- 商品ID（hidden） -->
+        <%= f.hidden_field :item_id, value: @item.id %>
+
+        <!-- 個数選択 -->
+        <div class="mb-3" style="max-width: 150px;">
+          <%= f.label :quantity, "個数", class: "form-label" %>
+          <%= f.select :amount, (1..10).map { |n| [n, n] }, {}, class: "form-select" %>
+        </div>
+
+        <!-- カートに入れるボタン -->
+        <%= f.submit "カートに入れる", class: "btn btn-success text-white px-4 py-2 fw-bold" %>
+
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>

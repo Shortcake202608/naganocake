@@ -4,7 +4,7 @@
               background-image: url(<%= asset_path 'top-image.jpg' %>);
               background-size: cover;
               background-position: center;">
-    <p>ようこそ、ながのCAKEへ!</p>
+    <p>ようこそ、ながのCakeへ!</p>
     <p>このサイトは、ケーキ販売のECサイトになります。</p>
     <p>会員でない方も商品の閲覧はできますが、</p>
     <p>購入には会員登録が必要になります。</p>
@@ -16,8 +16,9 @@
     <% @new_items.first(4).each do |item| %>
       <div class="col-md-3 mb-4">
         <div class="card h-100">
-          <%= image_tag item.image, class: "card-img-top" %>
-
+          <%= link_to item_path(item) do %>
+            <%= image_tag item.image, class: "card-img-top" %>
+          <% end %>
           <div class="card-body text-center">
             <h5 class="card-title"><%= item.name %></h5>
             <p class="card-text">¥<%= item.price %></p>

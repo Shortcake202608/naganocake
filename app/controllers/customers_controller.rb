@@ -11,10 +11,14 @@ class CustomersController < ApplicationController
   def update
     @customer = current_customer
     if @customer.update(customer_params)
-      redirect_to customers_information_path, notice: "登録情報を更新しました"
+      redirect_to my_page_customers_path, notice: "登録情報を更新しました"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
+  end
+
+  def information
+    @customer = current_customer
   end
 
   def unsubscribe

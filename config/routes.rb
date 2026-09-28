@@ -1,7 +1,21 @@
 Rails.application.routes.draw do
+  get "customers/my_page", to: "customers#my_page"
+  get "items", to: "items#index"
+  get "items/:id", to: "items#show"
   root "homes#top"
   get "about", to: "homes#about"
-  resources :customers, only: [ :update ] do
+  
+  resources :cart_items, only: [:index, :update, :destroy, :create] do
+    delete :destroy_all, on: :collection
+  end
+
+  resources :items do
+    collection do
+      get 'search'
+    end
+  end
+
+  resources :customers, only: [:edit, :update ] do
     collection do
       get "my_page"
       get "information"
@@ -9,6 +23,13 @@ Rails.application.routes.draw do
       get "unsubscribe"
       patch "withdraw"
     end
+  end
+
+  resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+
+  resources :orders, only: [:new, :create, :index, :show] do
+    post 'confirm', on: :collection
+    get 'complete', on: :collection
   end
 
   devise_for :admins, path: "admin", controllers: {
@@ -20,8 +41,12 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    root "homes#top"
+    resources :orders, only: [:show, :update ]
+    resources :customers, only: [ :index, :show, :edit, :update ]
     resources :items, only: [ :index, :show, :edit, :new, :create, :update ]
     resources :genres, only: [ :index, :create, :edit, :update ]
+    resources :order_details, only: [:update]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

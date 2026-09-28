@@ -2,7 +2,7 @@
   <div class="card p-4 shadow-sm " style="width: 800px;" >
     <h4>商品新規登録</h4>
 
-    <%= form_with model: @item do |f| %>
+    <%= form_with model: [:admin, @item], local: true do |f| %>
         <!-- 商品画像 -->
       <div class="row mb-3">
         <div class="col-2 d-flex align-items-center">
