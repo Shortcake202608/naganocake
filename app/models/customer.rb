@@ -15,4 +15,12 @@ class Customer < ApplicationRecord
   validates :postal_code, presence: true, format: { with: /\A\d{7}\z/ }
   validates :address, presence: true
   validates :phone_number, presence: true
+
+  def active_for_authentication?
+    super && (is_active == true)
+  end
+
+  def inactive_message
+    is_active ? super : :deleted_account
+  end
 end

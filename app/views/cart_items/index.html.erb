@@ -1,0 +1,70 @@
+<div class="container mt-5">
+  <h4 class="mb-4">ショッピングカート</h4>
+
+  <!-- カートを空にするボタン -->
+  <div class="text-end mb-3">
+    <%= link_to "カートを空にする", 
+      destroy_all_cart_items_path, 
+      data: { turbo_method: :delete, turbo_confirm: "カート内の商品を全て削除しますか？" }, 
+      class: "btn btn-danger" %>
+  </div>
+
+  <!-- カート一覧テーブル -->
+  <table class="table table-bordered align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td>
+            <div class="d-flex align-items-center">
+              <%= image_tag cart_item.item.image, size: "60x60", class: "me-3" if cart_item.item.image.attached? %>
+              <strong><%= cart_item.item.name %></strong>
+            </div>
+          </td>
+          <td>¥<%= number_with_delimiter(cart_item.item.price_with_tax) %></td>
+          <td>
+            <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch, local: true do |f| %>
+              <div class="input-group" style="max-width: 120px;">
+                <%= f.select :amount, (1..10).map { |n| [n, n] }, {}, class: "form-select" %>
+                <%= f.submit "変更", class: "btn btn-success text-white" %>
+              </div>
+            <% end %>
+          </td>
+          <td>¥<%= number_with_delimiter(cart_item.subtotal) %></td>
+          <td>
+           <%= link_to "削除する", cart_item_path(cart_item), data: { turbo_method: :delete, turbo_confirm: "削除してもよろしいですか？" }, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- 合計金額 -->
+  <div class="row justify-content-end mt-4">
+    <div class="col-md-4">
+      <table class="table table-bordered">
+        <tr>
+          <th>合計金額</th>
+          <td><%= number_to_currency(@cart_items.sum(&:subtotal), unit: "", precision: 0) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ボタン群 -->
+  <div class="d-flex justify-content-between mt-4">
+    <%= link_to "買い物を続ける", root_path, class: "btn btn-primary text-white px-4" %>
+    
+    <% if @cart_items.any? %>
+      <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success text-white px-4" %>
+    <% end %>
+  </div>
+</div>

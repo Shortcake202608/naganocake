@@ -1,0 +1,18 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+  <div class="card p-4 shadow-sm" style="width: 500px;">
+
+    <h4 class="text-center mb-4">ジャンル編集</h4>
+
+    <%= form_with model: [:admin, @genre], local: true do |f| %>
+      <div class="mb-3">
+        <%= f.label :name, "ジャンル名", class: "fw-bold" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "変更を保存", class: "btn btn-success text-white px-4 py-2" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
