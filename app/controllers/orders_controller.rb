@@ -76,5 +76,4 @@ class OrdersController < ApplicationController
       :shipping_cost,
     )
   end
-
 end

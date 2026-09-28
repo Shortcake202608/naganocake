@@ -122,4 +122,3 @@ Item.create!(
     filename: "donut_ichigo.jpg"
   )
 end
-

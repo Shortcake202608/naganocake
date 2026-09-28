@@ -4,18 +4,18 @@ Rails.application.routes.draw do
   get "items/:id", to: "items#show"
   root "homes#top"
   get "about", to: "homes#about"
-  
-  resources :cart_items, only: [:index, :update, :destroy, :create] do
+
+  resources :cart_items, only: [ :index, :update, :destroy, :create ] do
     delete :destroy_all, on: :collection
   end
 
   resources :items do
     collection do
-      get 'search'
+      get "search"
     end
   end
 
-  resources :customers, only: [:edit, :update ] do
+  resources :customers, only: [ :edit, :update ] do
     collection do
       get "my_page"
       get "information"
@@ -25,11 +25,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+  resources :addresses, only: [ :index, :edit, :create, :update, :destroy ]
 
-  resources :orders, only: [:new, :create, :index, :show] do
-    post 'confirm', on: :collection
-    get 'complete', on: :collection
+  resources :orders, only: [ :new, :create, :index, :show ] do
+    post "confirm", on: :collection
+    get "complete", on: :collection
   end
 
   devise_for :admins, path: "admin", controllers: {
@@ -42,11 +42,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "homes#top"
-    resources :orders, only: [:show, :update ]
+    resources :orders, only: [ :show, :update ]
     resources :customers, only: [ :index, :show, :edit, :update ]
     resources :items, only: [ :index, :show, :edit, :new, :create, :update ]
     resources :genres, only: [ :index, :create, :edit, :update ]
-    resources :order_details, only: [:update]
+    resources :order_details, only: [ :update ]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

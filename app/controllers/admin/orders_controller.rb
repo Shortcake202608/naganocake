@@ -29,4 +29,3 @@ class Admin::OrdersController < Admin::ApplicationController
     params.require(:order).permit(:status)
   end
 end
-

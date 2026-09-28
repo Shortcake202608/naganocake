@@ -20,5 +20,4 @@ class Order < ApplicationRecord
   def subtotal
     price * amount   # price は税込価格を保存しておく
   end
-
 end
